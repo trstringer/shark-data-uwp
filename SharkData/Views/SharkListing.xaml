@@ -1,0 +1,37 @@
+﻿<Page
+    x:Class="SharkData.Views.SharkListing"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SharkData.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:SharkData.Models"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <local:LengthFormatter x:Key="LengthFormatterConverter" />
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel>
+            <TextBlock Margin="10, 10, 10, 30" FontSize="30" Foreground="DarkBlue">Shark Data</TextBlock>
+            <ListView x:Name="SharkList" ItemsSource="{x:Bind ViewModel.Sharks,Mode=OneWay}" HorizontalAlignment="Center">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Shark">
+                        <StackPanel>
+                            <TextBox Text="{x:Bind Name,Mode=TwoWay}" 
+                                       FontSize="24" Foreground="DarkBlue" BorderBrush="LightBlue" />
+                            <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 20">
+                                <TextBlock Text="{x:Bind Binomial,Mode=OneWay}" 
+                                           FontSize="16" Foreground="Gray" />
+                                <TextBlock Text="{x:Bind MaxLength,Mode=OneWay,Converter={StaticResource LengthFormatterConverter}}" 
+                                           FontSize="16" Foreground="LightGray" 
+                                           Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Page>
